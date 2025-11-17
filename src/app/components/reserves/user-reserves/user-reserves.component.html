@@ -34,11 +34,11 @@
                   </svg>
                 </div>
                 <div class="room-info">
-                  <h3>{{item.nome}}</h3>
+                  <h3>{{item.name}}</h3>
                   <p>{{item.fk_build}}</p>
                   <p>{{item.floor}}</p>
                 </div>
-                <a href="teste" class="view-schedule-btn">Ver Horários</a>
+                <a routerLink="/enviorement/{{item.id}}" class="view-schedule-btn">Ver Horários</a>
               </div>
             }
         </section>

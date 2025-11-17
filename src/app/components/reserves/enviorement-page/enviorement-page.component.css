@@ -1,0 +1,166 @@
+main {
+    background-color: #F0F5FD;
+    font-family: 'Inter', sans-serif;
+    padding: 40px;
+}
+
+.room-card {
+    background-color: white;
+    padding: 24px;
+    margin: 0 auto 24px auto;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    box-shadow: none;
+    max-width: 1200px;
+    position: relative;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #092B71;
+}
+
+p {
+    font-size: 16px;
+    color: #4F545C;
+    margin-bottom: 0;
+}
+
+.btn-primary,
+.btn-secondary {
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #1b53c7;
+}
+
+.btn-primary:hover {
+    background-color: #092B71;
+}
+
+#reserve-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+#datepicker {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    color: #4F545C;
+}
+
+#schedule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.schedule-item {
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+    border: 2px solid transparent;
+    color: #092B71;
+}
+
+.schedule-item.available {
+    background-color: #e3f7e3;
+    border: 2px solid #a3e9a4;
+}
+
+.schedule-item.available:hover {
+    background-color: #c8f0c8;
+}
+
+.schedule-item.selected {
+    background-color: #1b53c7 !important;
+    color: white;
+    border-color: #1b53c7;
+}
+
+.schedule-item.disabled {
+    background-color: #E0E0E0;
+    color: #4F545C;
+    text-decoration: none;
+    cursor: not-allowed;
+}
+
+#form-error {
+    font-weight: 500;
+    border-left: 5px solid;
+}
+
+#saveReservationBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.no-reservations {
+    text-align: center;
+    color: #4F545C;
+    font-weight: 500;
+}
+
+/* Tabela de Reservas */
+#reservations-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#reservations-table thead th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4F545C;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+#reservations-table tbody tr {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+#reservations-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+#reservations-table td {
+    padding: 16px 0;
+    font-size: 14px;
+    color: #092B71;
+}
+
+/* Ajustes do Bootstrap */
+.modal-content {
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+}
+
+.modal-header {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-title {
+    color: #092B71;
+}
+
+.badge {
+    background-color: #1b53c7 !important;
+}

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { EnviorementsService } from '../../../services/enviorements.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-user-reserves',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './user-reserves.component.html',
   styleUrl: './user-reserves.component.css'
 })

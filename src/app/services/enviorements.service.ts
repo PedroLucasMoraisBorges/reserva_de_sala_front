@@ -36,4 +36,11 @@ export class EnviorementsService {
     };
     return this.http.delete<any>(`${this.baseUrl}/deleteenvironment/${id}`, {headers});
   }
+
+  getEnviorementById(id:any) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.get<any>(`${this.baseUrl}/getEnviorement/${id}`, {headers});
+  }
 }

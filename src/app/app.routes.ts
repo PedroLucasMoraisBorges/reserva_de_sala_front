@@ -7,6 +7,7 @@ import { MainLayoutComponent } from './components/layouts/main-layout/main-layou
 import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layout.component';
 import { CreateUserComponent } from './components/authenticate/create-user/create-user.component';
 import { UserReservesComponent } from './components/reserves/user-reserves/user-reserves.component';
+import { EnviorementPageComponent } from './components/reserves/enviorement-page/enviorement-page.component';
 
 export const routes: Routes = [
 
@@ -19,12 +20,13 @@ export const routes: Routes = [
       { path: 'enviorement/register', component: RegisterRoomComponent },
       { path: 'buildings', component: RegisterBuildingComponent },
       { path: 'reservas', component: UserReservesComponent },
+      { path: 'enviorement/:id', component: EnviorementPageComponent }
     ]
   },
 
   // --- Layout de autenticação (sem sidebar) ---
   {
-    path: '',
+    path: 'auth',
     component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },

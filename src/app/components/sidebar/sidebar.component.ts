@@ -24,7 +24,7 @@ export class SidebarComponent {
 
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   ngOnInit() {
