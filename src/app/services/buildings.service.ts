@@ -15,4 +15,25 @@ export class BuildingsService {
     };
     return this.http.get<any>(`${this.baseUrl}/getAllBuildings`, {headers});
   }
+
+  createBuilding(payload: any) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.post<any>(`${this.baseUrl}/createBuilding`, payload, {headers});
+  }
+
+  updateBuilding(id: string, payload: any) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.put<any>(`${this.baseUrl}/updateBuilding/${id}`, payload, {headers});
+  }
+
+  deleteBuilding(id: string) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.delete<any>(`${this.baseUrl}/deleteBuilding/${id}`, {headers});
+  }
 }

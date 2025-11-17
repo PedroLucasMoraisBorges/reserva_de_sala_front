@@ -28,11 +28,8 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.floors }}</td>
                 <td>
-                  <span class="actions-btn">...</span>
-                  <div class="dropdown-menu">
-                    <span class="edit-btn">Editar</span>
-                    <span class="delete-btn">Excluir</span>
-                  </div>
+                  <button class="action-btn edit-btn" (click)="handleEditBuilding(item)">Editar</button>
+                  <button class="action-btn delete-btn" (click)="deleteBuilding(item.id)">Excluir</button>
                 </td>
               </tr>
            }
@@ -43,16 +40,31 @@
   </section>
 </div>
 
-@if(addNewBuilding === true) {
-  <div id="newBuildingModal" class="modal">
+@if (addNewBuilding === true || editMode === true) {
+  <div id="roomModal" class="modal">
     <div class="modal-content">
-      <h2>Adicionar / Editar Prédio</h2>
-      <form id="addBuildingForm" method="post">
+      <h2 id="modalTitle">
+        {{ editMode ? 'Editar Prédio' : 'Adicionar Novo Prédio' }}
+      </h2>
+
+      <form id="roomForm" (ngSubmit)="saveEnviorement()" #roomForm="ngForm">
+        <div class="form-group">
+          <label for="buildingName">Nome</label>
+          <input type="text" id="buildingName" name="name" [(ngModel)]="selectedBuilding.name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="floors">Número de andares</label>
+          <input type="text" id="floors" name="floors" [(ngModel)]="selectedBuilding.floors" required />
+        </div>
+
         <div class="modal-buttons">
-          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="handleAddNewBuilding()">
+          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="closeModal()">
             Cancelar
           </button>
-          <button type="submit" class="modal-save-btn">Salvar</button>
+          <button type="submit" class="modal-save-btn">
+            {{ editMode ? 'Atualizar' : 'Salvar' }}
+          </button>
         </div>
       </form>
     </div>
