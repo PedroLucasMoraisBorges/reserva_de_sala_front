@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MyFirstApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
@@ -57,3 +58,6 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# reserva_de_sala_front
+>>>>>>> 909d4a15b5d6d69c636546b91797b8ac324fef7e
