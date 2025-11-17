@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    font-family: 'Inter', sans-serif;
+    background-color: #F0F5FD;
+    padding: 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Base section styles */
+section {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border: 1px solid #E0E0E0;
+}
+
+section .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #092B71;
+    margin-bottom: 16px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #092B71;
+    margin-bottom: 4px;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: #4F545C;
+}
+
+/* Active Reservations Section */
+.active-reserves {
+    max-width: 1200px;
+    margin: 0 auto 24px auto;
+}
+
+.reserve-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.reserve-card span {
+    font-size: 16px;
+    color: #092B71;
+    font-weight: 500;
+}
+
+.reserve-card a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.no-reserves-message {
+    font-size: 14px;
+    color: #4F545C;
+    font-weight: 400;
+}
+
+/* Search Section */
+.search-form {
+    max-width: 1200px;
+    margin: 0 auto 24px auto;
+}
+
+.search-form form {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4F545C;
+}
+
+.search-form button {
+    background-color: #1b53c7;
+    color: white;
+    font-weight: 500;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Room Results Section */
+.rooms-results {
+    max-width: 1200px;
+    margin: 0 auto 24px auto;
+}
+
+.room-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.room-card .room-image {
+    width: 48px;
+    height: 48px;
+    background-color: #E0E0E0;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.room-card .room-image svg {
+    width: 24px;
+    height: 24px;
+    color: #092B71;
+}
+
+.room-card .room-info {
+    flex-grow: 1;
+}
+
+.room-card .room-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #092B71;
+    margin-bottom: 4px;
+}
+
+.room-card .room-info p {
+    font-size: 14px;
+    color: #4F545C;
+    margin-bottom: 4px;
+}
+
+.room-card a {
+    background-color: #1b53c7;
+    color: white;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}

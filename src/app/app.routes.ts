@@ -6,6 +6,7 @@ import { LoginComponent } from './components/authenticate/login/login.component'
 import { MainLayoutComponent } from './components/layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layout.component';
 import { CreateUserComponent } from './components/authenticate/create-user/create-user.component';
+import { UserReservesComponent } from './components/reserves/user-reserves/user-reserves.component';
 
 export const routes: Routes = [
 
@@ -17,6 +18,7 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'enviorement/register', component: RegisterRoomComponent },
       { path: 'buildings', component: RegisterBuildingComponent },
+      { path: 'reservas', component: UserReservesComponent },
     ]
   },
 

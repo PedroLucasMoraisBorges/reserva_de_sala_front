@@ -37,7 +37,11 @@ export class SidebarComponent {
 
     this.authService.getUserInfo(token).subscribe({
       next: (res) => {
-        this.user = res; // ✔️ agora user tem dados
+        if (res.is_staff === false || res.is_superuser === false) {
+          this.router.navigate(['/reservas']);
+        }
+        this.user = res;
+        console.log(this.user);
       },
       error: () => {
         this.router.navigate(['/login']);
