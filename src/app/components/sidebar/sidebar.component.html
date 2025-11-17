@@ -1,0 +1,34 @@
+<aside class="sidebar" id="sidebar">
+  <img src="" alt="logo UNIFAP" />
+  <br />
+  <!-- name -->
+  <h3>Sistema de Reserva</h3>
+  <br />
+  <!-- Usuário -->
+
+  <!-- Navegação -->
+  <nav class="nav-links">
+    <span><i class="fa-solid fa-user"></i> Olá, {{ user?.name }}</span>
+    <a routerLink="/"
+      ><i class="fa-solid fa-house"></i> Início</a
+    >
+    <a routerLink="/enviorement/register"
+      ><i class="fa-solid fa-plus"></i> Cadastrar Sala</a
+    >
+    <a routerLink="/buildings"
+      ><i class="fa-solid fa-building"></i> Cadastrar Prédio</a
+    >
+    <a href="#"><i class="fa-solid fa-chart-line"></i> Relatórios</a>
+    <a href="" class="btn-logout"
+      ><i class="fa-solid fa-right-from-bracket"></i> Sair</a
+    >
+  </nav>
+</aside>
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
+
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+  });
+</script>

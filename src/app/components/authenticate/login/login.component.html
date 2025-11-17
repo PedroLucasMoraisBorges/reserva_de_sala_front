@@ -1,0 +1,32 @@
+<div class="login-container">
+  <div class="logo-container">
+      <img src="" alt="logo">
+  </div>
+  <h1>Login</h1>
+
+  <form (ngSubmit)="submitLogin()" method="post">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="seuemail@gmail.com" [(ngModel)]="email"  required>
+
+        <ul class="errorlist field-errors">
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="********" [(ngModel)]="password" required>
+
+        <ul class="errorlist field-errors">
+        </ul>
+
+      <button type="submit">Fazer Login</button>
+      </div>
+  </form>
+
+  <br>
+
+  <p>
+      Não tem uma conta? <a routerLink="/register">Cadastre-se</a>
+  </p>
+</div>

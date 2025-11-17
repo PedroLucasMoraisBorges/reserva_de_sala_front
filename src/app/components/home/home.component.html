@@ -1,0 +1,118 @@
+<div class="container">
+  <header class="header">
+    <h1 class="header-title">Gerenciador de Salas</h1>
+    <p class="header-subtitle">Gerencie todas as salas de sua instituição</p>
+    <button class="add-button" id="openModalBtn" (click)="handleAddNewEnviorement()">+ Nova Sala</button>
+  </header>
+
+  <section class="metrics">
+    <div class="metric-card enviorements-card">
+      <h3>{{ activeEnviorements }}</h3>
+      <p>Salas Disponíveis</p>
+    </div>
+    <div class="metric-card">
+      <h3>{{ reservedEnviorements }}</h3>
+      <p>Salas Reservadas</p>
+    </div>
+    <div class="metric-card">
+      <h3>12</h3>
+      <p>Definir métrica</p>
+    </div>
+    <div class="metric-card">
+      <h3>{{ canceledReserves }}</h3>
+      <p>Reservas Canceladas</p>
+    </div>
+  </section>
+
+  <section class="filters">
+    <h3 class="filters-title">Busca</h3>
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Buscar por nome, localização ou descrição"
+      />
+      <div class="search-icon" id="searchIcon" (click)="submit($event)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="room-list">
+    <div class="list-header">
+      <h3 class="list-title">Salas Cadastradas</h3>
+      <p class="list-subtitle">5 salas encontradas</p>
+    </div>
+
+    <table>
+    <thead>
+      <tr>
+        <th>NOME DA SALA</th>
+        <th>PRÉDIO</th>
+        <th>ANDAR</th>
+        <th>AÇÕES</th>
+      </tr>
+    </thead>
+    <tbody id="roomTableBody">
+      @if(rooms.length === 0){
+        <tr>
+          <td colspan="4">Nenhuma sala cadastrada.</td>
+        </tr>
+      } @else {
+        @for (item of rooms; track item) {
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.fk_build }}</td>
+            <td>{{ item.floor }}</td>
+            <td>
+              <button class="action-btn edit-btn">Editar</button>
+              <button class="action-btn delete-btn">Excluir</button>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+  </section>
+</div>
+
+@if (addNewEnviorement === true) {
+  <div id="roomModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Adicionar Nova Sala</h2>
+      <form id="roomForm" method="post">
+        <div class="form-group">
+          <label for="roomName">Nome da Sala</label>
+          <input type="text" id="roomName" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="building">Prédio</label>
+          <select id="building" name="fk_build" required>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="floor">Andar</label>
+          <input type="number" id="floor" name="floor" required />
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="handleAddNewEnviorement()">
+            Cancelar
+          </button>
+          <button type="submit" class="modal-save-btn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

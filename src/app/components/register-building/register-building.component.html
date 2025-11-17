@@ -1,0 +1,60 @@
+<div class="container">
+  <header class="header">
+    <h1 class="header-title">Cadastro de Prédios</h1>
+    <p class="header-subtitle">Gerencie todos os prédios da sua instituição</p>
+    <button class="add-button" id="openModalBtn" (click)="handleAddNewBuilding()">+ Novo Prédio</button>
+  </header>
+
+  <section class="building-list">
+    <div class="list-header">
+      <h3 class="list-title">Prédios Cadastrados</h3>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome do Prédio</th>
+          <th>Número de Andares</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="buildingTableBody">
+        @if(buildings.length === 0) {
+          <tr>
+            <td colspan="3">Nenhum prédio cadastrado.</td>
+          </tr>
+        } @else {
+           @for (item of buildings; track item) {
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.floors }}</td>
+                <td>
+                  <span class="actions-btn">...</span>
+                  <div class="dropdown-menu">
+                    <span class="edit-btn">Editar</span>
+                    <span class="delete-btn">Excluir</span>
+                  </div>
+                </td>
+              </tr>
+           }
+        }
+
+      </tbody>
+    </table>
+  </section>
+</div>
+
+@if(addNewBuilding === true) {
+  <div id="newBuildingModal" class="modal">
+    <div class="modal-content">
+      <h2>Adicionar / Editar Prédio</h2>
+      <form id="addBuildingForm" method="post">
+        <div class="modal-buttons">
+          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="handleAddNewBuilding()">
+            Cancelar
+          </button>
+          <button type="submit" class="modal-save-btn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
