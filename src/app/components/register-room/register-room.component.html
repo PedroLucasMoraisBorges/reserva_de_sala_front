@@ -2,7 +2,7 @@
   <header class="header">
     <h1>Gerenciador de Salas</h1>
     <div class="header-links">
-      <a href="" class="link-secondary"
+      <a routerLink="/buildings" class="link-secondary"
         >Cadastrar Prédio</a
       >
       <button class="add-button" id="openModalBtn" (click)="handleAddNewEnviorement()">+ Nova Sala</button>
@@ -30,8 +30,8 @@
             <td>{{ item.fk_build }}</td>
             <td>{{ item.floor }}</td>
             <td>
-              <button class="action-btn edit-btn">Editar</button>
-              <button class="action-btn delete-btn">Excluir</button>
+              <button class="action-btn edit-btn" (click)="handleEditEnviorement(item)">Editar</button>
+              <button class="action-btn delete-btn" (click)="deleteEnviorement(item.id)">Excluir</button>
             </td>
           </tr>
         }
@@ -40,29 +40,46 @@
   </table>
 </div>
 
-@if(addNewEnviorement === true) {
+@if (addNewEnviorement === true || editMode === true) {
   <div id="roomModal" class="modal">
     <div class="modal-content">
-      <h2 id="modalTitle">Adicionar Nova Sala</h2>
-      <form id="roomForm" method="post">
+      <h2 id="modalTitle">
+        {{ editMode ? 'Editar Sala' : 'Adicionar Nova Sala' }}
+      </h2>
+
+      <form id="roomForm" (ngSubmit)="saveEnviorement()" #roomForm="ngForm">
         <div class="form-group">
           <label for="roomName">Nome da Sala</label>
-          <input type="text" id="roomName" name="name" required />
+          <input type="text" id="roomName" name="name" [(ngModel)]="selectedEnviorement.name" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Descrição</label>
+          <input type="text" id="description" name="description" [(ngModel)]="selectedEnviorement.description" required />
         </div>
         <div class="form-group">
           <label for="building">Prédio</label>
-          <select id="building" name="fk_build" required>
+          <select
+            id="building"
+            name="fk_build"
+            [(ngModel)]="selectedEnviorement.fk_build"
+            required
+          >
+            @for (item of buildings; track item) {
+              <option [value]="item.id">{{ item.name }}</option>
+            }
           </select>
         </div>
         <div class="form-group">
           <label for="floor">Andar</label>
-          <input type="number" id="floor" name="floor" required />
+          <input type="number" id="floor" name="floor" [(ngModel)]="selectedEnviorement.floor" required />
         </div>
         <div class="modal-buttons">
-          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="handleAddNewEnviorement()">
+          <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="closeModal()">
             Cancelar
           </button>
-          <button type="submit" class="modal-save-btn">Salvar</button>
+          <button type="submit" class="modal-save-btn">
+            {{ editMode ? 'Atualizar' : 'Salvar' }}
+          </button>
         </div>
       </form>
     </div>
