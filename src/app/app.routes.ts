@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from './components/layouts/auth-layout/auth-layou
 import { CreateUserComponent } from './components/authenticate/create-user/create-user.component';
 import { UserReservesComponent } from './components/reserves/user-reserves/user-reserves.component';
 import { EnviorementPageComponent } from './components/reserves/enviorement-page/enviorement-page.component';
+import { AuthGuard } from '../auths/auth.guard';
 
 export const routes: Routes = [
 
@@ -16,9 +17,9 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'enviorement/register', component: RegisterRoomComponent },
-      { path: 'buildings', component: RegisterBuildingComponent },
+      { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'enviorement/register', component: RegisterRoomComponent, canActivate: [AuthGuard]  },
+      { path: 'buildings', component: RegisterBuildingComponent, canActivate: [AuthGuard] },
       { path: 'reservas', component: UserReservesComponent },
       { path: 'enviorement/:id', component: EnviorementPageComponent }
     ]

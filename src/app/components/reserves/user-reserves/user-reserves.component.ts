@@ -4,10 +4,11 @@ import { EnviorementsService } from '../../../services/enviorements.service';
 import { RouterLink } from "@angular/router";
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ReservationService } from '../../../services/reservation-service.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-reserves',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatSnackBarModule],
   templateUrl: './user-reserves.component.html',
   styleUrl: './user-reserves.component.css'
 })
@@ -15,6 +16,7 @@ export class UserReservesComponent {
   private enviorementsService = inject(EnviorementsService)
   private reservationService = inject(ReservationService)
   private authService = inject(AuthenticationService)
+  private snackBar = inject(MatSnackBar)
   enviorements: any[] = [];
   reservations: any[] = []
   formattedReserves: any[] = []
@@ -22,7 +24,10 @@ export class UserReservesComponent {
   cancelReserves(id:string) {
     this.reservationService.cancelReserve(id).subscribe({
       next: (res) =>{
-        console.log('jjj')
+        this.snackBar.open("Reserva cancelada com sucesso",  "Fechar" , {
+          duration: 9000,
+          panelClass: ['toast-info', 'toast']
+        })
       }
     })
   }

@@ -31,20 +31,16 @@ export class SidebarComponent {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/login']);
       return;
     }
-    console.log(token)
 
     this.authService.getUserInfo(token).subscribe({
       next: (res) => {
-        if (res.is_staff === false || res.is_superuser === false) {
-          this.router.navigate(['/reservas']);
-        }
         this.user = res;
       },
       error: () => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
       }
     });
   }

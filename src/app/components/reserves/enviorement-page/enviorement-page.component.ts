@@ -4,10 +4,12 @@ import { ReservationService } from '../../../services/reservation-service.servic
 import { EnviorementsService } from '../../../services/enviorements.service';
 import { FormsModule } from "@angular/forms";
 import { AuthenticationService } from '../../../services/authentication.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-enviorement-page',
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule],
   templateUrl: './enviorement-page.component.html',
   styleUrl: './enviorement-page.component.css'
 })
@@ -15,6 +17,7 @@ export class EnviorementPageComponent {
   private route = inject(ActivatedRoute);
   private reservationService = inject(ReservationService)
   private enviorementService = inject(EnviorementsService)
+
 
   enviorement: any = {}
   reservations: any[] = []
@@ -28,6 +31,7 @@ export class EnviorementPageComponent {
   user :any = {}
   initReserve: boolean = false
   dataHasSelected: boolean = false
+  private snackBar = inject(MatSnackBar)
 
   handleInitReserve() {
     this.initReserve = !this.initReserve
@@ -107,10 +111,16 @@ export class EnviorementPageComponent {
 
         this.reservationService.createReservation(payload).subscribe({
           next: (res) => {
-            console.log("Reserva criada", res);
+            this.snackBar.open("Reserva criada", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-success', 'toast']
+            })
           },
           error: (err) => {
-            console.error(err);
+            this.snackBar.open("Reserva criada", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-error', 'toast']
+            })
           }
         });
       }
@@ -118,12 +128,18 @@ export class EnviorementPageComponent {
   }
 
   ngOnInit() {
-    this.loadSchedules();
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+      this.loadSchedules();
+      this.loadEnviorement();
+    });
+  }
 
+  loadEnviorement() {
     this.enviorementService.getEnviorementById(this.id).subscribe({
       next: (res) => {
-        this.enviorement = res.enviorement
+        this.enviorement = res.enviorement;
       }
-    })
-  }
+    });
+}
 }

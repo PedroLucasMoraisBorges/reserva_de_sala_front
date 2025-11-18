@@ -16,6 +16,59 @@ body {
   padding: 20px;
 }
 
+.toast {
+  color: #fff !important;
+}
+
+
+.toast .mdc-snackbar__surface {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Texto e botão */
+.toast .mdc-snackbar__label,
+.toast .mdc-snackbar__actions button {
+  color: #fff !important;
+}
+
+.toast span {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.toast-info:hover span{
+  background-color: #1e88e5;
+  filter: brightness(1.1);
+  height: 100%;
+}
+
+.toast-success:hover span{
+  background-color: #43a047;
+  filter: brightness(1.1);
+  height: 100%;
+}
+
+.toast-error:hover span{
+  background-color: #e53935;
+  filter: brightness(1.1);
+  height: 100%;
+}
+
+
+.toast-info {
+  background-color: #1e88e5 !important;
+}
+
+.toast-success {
+  background-color: #43a047 !important;
+}
+
+.toast-error {
+  background-color: #e53935 !important;
+}
+
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
