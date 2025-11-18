@@ -34,6 +34,7 @@ export class SidebarComponent {
       this.router.navigate(['/login']);
       return;
     }
+    console.log(token)
 
     this.authService.getUserInfo(token).subscribe({
       next: (res) => {
@@ -41,7 +42,6 @@ export class SidebarComponent {
           this.router.navigate(['/reservas']);
         }
         this.user = res;
-        console.log(this.user);
       },
       error: () => {
         this.router.navigate(['/login']);

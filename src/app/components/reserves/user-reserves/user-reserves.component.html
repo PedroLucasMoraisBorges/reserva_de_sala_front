@@ -7,10 +7,16 @@
 
         <section class="active-reserves">
             <p class="section-title">Reservas Ativas</p>
-              <div class="reserve-card">
-                  <span>Sala 1B - 15/09/25 08:00</span>
-                  <a href="#" class="cancel-btn">Cancelar</a>
-              </div>
+              @if (reservations.length === 0) {
+
+              } @else {
+                @for (item of formattedReserves; track item) {
+                  <div class="reserve-card">
+                    <span>{{item.enviorementName}} - {{item.date}} - {{item.firstSchedule}}</span>
+                    <button href="#" class="cancel-btn" (click)="cancelReserves(item.id)">Cancelar</button>
+                </div>
+                }
+              }
         </section>
 
         <section class="search-form">

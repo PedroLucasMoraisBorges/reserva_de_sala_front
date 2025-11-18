@@ -16,5 +16,32 @@ export class ReservationService {
     };
     return this.http.get<any>(`${this.baseUrl}/getSchedules/${id}`, {headers});
   }
-  constructor() { }
+
+  getReservedSchedules(id: string, date: string) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.get<any>(`${this.baseUrl}/getReservedSchedules/${id}/reserved_schedules/?date=${date}`, {headers});
+  }
+
+  getUserReservations(user_id: string) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.get<any>(`${this.baseUrl}/minhasReservas/${user_id}`, {headers});
+  }
+
+  cancelReserve(id:string) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.put<any>(`${this.baseUrl}/cancelarReserva/${id}`, {headers});
+  }
+  createReservation(payload: any) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    console.log(payload)
+    return this.http.post<any>(`${this.baseUrl}/reserve/create/`, payload, {headers});
+  }
 }

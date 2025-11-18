@@ -9,7 +9,7 @@
         <h2>Sala: {{ enviorement.name }}</h2>
         <p><strong>Prédio:</strong> {{ enviorement.fk_build }} | <strong>Andar:</strong> {{ enviorement.floor }}º</p>
         <p><strong>Capacidade:</strong> até {{ enviorement.idicatedLimit }} pessoas.</p>
-        <button class="btn btn-primary" id="reserve-btn">Reservar uma Sala</button>
+        <button class="btn btn-primary" id="reserve-btn" (click)="handleInitReserve()">Reservar uma Sala</button>
     </div>
 
     <div class="room-card">
@@ -30,7 +30,7 @@
                     } @else {
                       @for (item of reservations; track item) {
                         <tr>
-                            <td>{{ item.fl_build }}</td>
+                            <td>{{ item.room.id }}</td>
                             <td>
                                 <!-- Fazer for das reservas -->
                             </td>
@@ -43,21 +43,24 @@
     </div>
 </div>
 
-<div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
+@if (initReserve === true) {
+  <div class="" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="calendarModalLabel">Selecione a Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <input type="date" id="datepicker" class="form-control">
+                <input type="date" id="datepicker" class="form-control" (change)="onDateChange($event)">
             </div>
-        </div>
+          </form>
     </div>
 </div>
+}
 
-<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+@if (dataHasSelected === true) {
+  <div class="" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,15 +70,29 @@
             <div class="modal-body">
                 <form id="reservationForm">
                     <input type="hidden" id="date-to-reserve" name="date">
-                    <div id="schedule-list"></div>
+                    <div class="schedule-list">
+
+                      @for (s of schedules; track $index) {
+                        <div
+                          class="schedule-item"
+                          [class.disabled]="isReserved($index)"
+                          [class.available]="!isReserved($index)"
+                          [class.selected]="selectedIndexes.has($index)"
+                          (click)="onScheduleClick($index)"
+                        >
+                          {{ s.fields.entryTime.slice(0,5) }} - {{ s.fields.exitTime.slice(0,5) }}
+                        </div>
+                      }
+                    </div>
                     <div id="form-error" class="alert alert-danger mt-3 d-none"></div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="saveReservationBtn" disabled>Salvar Reserva</button>
+                <button type="button" class="btn btn-primary" id="saveReservationBtn" (click)="saveReservation()">Salvar Reserva</button>
             </div>
         </div>
     </div>
 </div>
+}
 </main>
