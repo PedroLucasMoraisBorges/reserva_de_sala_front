@@ -73,6 +73,10 @@
           <label for="floor">Andar</label>
           <input type="number" id="floor" name="floor" [(ngModel)]="selectedEnviorement.floor" required />
         </div>
+        <div class="form-group">
+          <label for="indicated_limit">Capacidade Máxima</label>
+          <input type="number" id="indicated_limit" name="indicated_limit" [(ngModel)]="selectedEnviorement.indicated_limit" required />
+        </div>
         <div class="modal-buttons">
           <button type="button" class="modal-close-btn" id="closeModalBtn" (click)="closeModal()">
             Cancelar

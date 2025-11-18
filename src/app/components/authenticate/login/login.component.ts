@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class LoginComponent {
   authService = inject(AuthenticationService)
+  private snackBar = inject(MatSnackBar)
   router = inject(Router);
   email = '';
   password = '';
@@ -25,7 +27,10 @@ export class LoginComponent {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error('Erro de login:', err);
+        this.snackBar.open("Email ou senha inválidos", "Fechar", {
+          duration: 9000,
+          panelClass: ['toast-error', 'toast']
+        });
       }
     });
   }

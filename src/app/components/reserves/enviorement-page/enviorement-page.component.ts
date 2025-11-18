@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthenticationService } from '../../../services/authentication.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { BuildingsService } from '../../../services/buildings.service';
 
 @Component({
   selector: 'app-enviorement-page',
@@ -17,9 +18,12 @@ export class EnviorementPageComponent {
   private route = inject(ActivatedRoute);
   private reservationService = inject(ReservationService)
   private enviorementService = inject(EnviorementsService)
+  private buildingService = inject(BuildingsService)
+  private snackBar = inject(MatSnackBar)
 
 
   enviorement: any = {}
+  formattedEnviorement: any = {}
   reservations: any[] = []
   schedules: any[] = []
   reservedIds = new Set<string>();
@@ -31,7 +35,7 @@ export class EnviorementPageComponent {
   user :any = {}
   initReserve: boolean = false
   dataHasSelected: boolean = false
-  private snackBar = inject(MatSnackBar)
+  userReserves :any[] = []
 
   handleInitReserve() {
     this.initReserve = !this.initReserve
@@ -115,9 +119,12 @@ export class EnviorementPageComponent {
               duration: 9000,
               panelClass: ['toast-success', 'toast']
             })
+            this.initReserve = false
+            this.dataHasSelected = false
+            this.loadUserReserves()
           },
           error: (err) => {
-            this.snackBar.open("Reserva criada", "Fechar", {
+            this.snackBar.open("Erro ao criar reserva", "Fechar", {
               duration: 9000,
               panelClass: ['toast-error', 'toast']
             })
@@ -132,14 +139,40 @@ export class EnviorementPageComponent {
       this.id = params.get('id');
       this.loadSchedules();
       this.loadEnviorement();
+      this.loadUserReserves()
     });
   }
 
   loadEnviorement() {
-    this.enviorementService.getEnviorementById(this.id).subscribe({
-      next: (res) => {
-        this.enviorement = res.enviorement;
-      }
+      console.log(this.user)
+      this.enviorementService.getEnviorementById(this.id).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.enviorement = res.enviorement;
+          this.buildingService.getBuildingById(res.enviorement.fk_build).subscribe({
+            next: (res2) => {
+              this.enviorement.fk_build = res2.building.name
+              this.formattedEnviorement = this.enviorement
+            }
+          })
+        }
     });
-}
+  }
+
+  loadUserReserves() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return;
+    }
+
+    this.authService.getUserInfo(token).subscribe({
+      next: (res1) => {
+          this.reservationService.getUserReservationsFromEnviorement(res1.id, this.id).subscribe({
+        next: (res) => {
+          this.reservations = res.userReserves
+        }
+      })
+    }})
+  }
 }

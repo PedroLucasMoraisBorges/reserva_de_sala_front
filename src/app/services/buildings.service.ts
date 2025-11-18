@@ -16,6 +16,13 @@ export class BuildingsService {
     return this.http.get<any>(`${this.baseUrl}/getAllBuildings`, {headers});
   }
 
+  getBuildingById(id: string) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    }
+    return this.http.get<any>(`${this.baseUrl}/getBuildingById/${id}`, {headers})
+  }
+
   createBuilding(payload: any) {
     const headers = {
       Authorization: `Bearer ${this.token}`

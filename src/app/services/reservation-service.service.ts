@@ -31,6 +31,13 @@ export class ReservationService {
     return this.http.get<any>(`${this.baseUrl}/minhasReservas/${user_id}`, {headers});
   }
 
+  getUserReservationsFromEnviorement(user_id: any, fk_enviorement: any) {
+    const headers = {
+      Authorization: `Bearer ${this.token}`
+    };
+    return this.http.get<any>(`${this.baseUrl}/getUserReservesFromEnviorement/${user_id}/${fk_enviorement}`, {headers});
+  }
+
   cancelReserve(id:string) {
     const headers = {
       Authorization: `Bearer ${this.token}`

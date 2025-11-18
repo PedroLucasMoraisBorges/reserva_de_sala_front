@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EnviorementsService } from '../../services/enviorements.service';
 import { FormsModule } from '@angular/forms';
 import { BuildingsService } from '../../services/buildings.service';
-import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
   private enviorementsService = inject(EnviorementsService);
   private buildingsService = inject(BuildingsService);
-  private toastr = inject(ToastrService);
+  private snackBar = inject(MatSnackBar)
 
   reservedEnviorements: number = 0;
   canceledReserves: number = 0;
@@ -64,7 +64,8 @@ export class HomeComponent {
       name: this.selectedEnviorement.name,
       fk_build: this.selectedEnviorement.fk_build,
       floor: this.selectedEnviorement.floor,
-      description: this.selectedEnviorement.description
+      description: this.selectedEnviorement.description,
+      indicated_limit: this.selectedEnviorement.indicated_limit
     };
 
     if (this.editMode) {
@@ -73,9 +74,18 @@ export class HomeComponent {
           next: () => {
             this.closeModal();
             this.reloadEnvs();
-            // this.toastr.success('Ambiente removido com sucesso');
+
+            this.snackBar.open("Alteração concluída", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-info', 'toast']
+            })
           },
-          error: () => console.log('Erro ao atualizar ambiente')
+          error: () => {
+            this.snackBar.open("Erro ao editar sala", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-error', 'toast']
+            })
+          }
         });
     } else {
         this.enviorementsService.createEnviorement(payload)
@@ -83,8 +93,17 @@ export class HomeComponent {
             next: () => {
               this.closeModal();
               this.reloadEnvs();
+              this.snackBar.open("Sala criada com sucesso", "Fechar", {
+                duration: 9000,
+                panelClass: ['toast-success', 'toast']
+              })
             },
-            error: () => console.log('Erro ao criar ambiente')
+            error: () => {
+              this.snackBar.open("Erro ao criar sala", "Fechar", {
+                duration: 9000,
+                panelClass: ['toast-error', 'toast']
+              })
+            }
           });
       }
   }

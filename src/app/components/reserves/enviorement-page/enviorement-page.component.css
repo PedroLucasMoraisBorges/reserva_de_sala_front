@@ -143,6 +143,22 @@ p {
     color: #092B71;
 }
 
+.dateCollun {
+  width: 20%;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+.entryTimeTag {
+  background-color: #092c7134;
+  padding: .1rem;
+  border-radius: 2px;
+  margin: .4rem;
+}
+
 /* Ajustes do Bootstrap */
 .modal-content {
     border-radius: 8px;

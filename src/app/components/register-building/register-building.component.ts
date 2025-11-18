@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BuildingsService } from '../../services/buildings.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-building',
@@ -11,6 +12,7 @@ import { BuildingsService } from '../../services/buildings.service';
 })
 export class RegisterBuildingComponent {
   private buildingService = inject(BuildingsService);
+  private snackBar = inject(MatSnackBar)
   buildings: any[] = [];
   addNewBuilding :boolean = false;
   editMode: boolean = false;
@@ -61,9 +63,17 @@ export class RegisterBuildingComponent {
           next: () => {
             this.closeModal();
             this.reloadEnvs();
-            // this.toastr.success('Ambiente removido com sucesso');
+            this.snackBar.open("Alteração concluída", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-info', 'toast']
+            })
           },
-          error: () => console.log('Erro ao atualizar ambiente')
+          error: () => {
+            this.snackBar.open("Erro ao editar prédio", "Fechar", {
+              duration: 9000,
+              panelClass: ['toast-error', 'toast']
+            })
+          }
         });
     } else {
         this.buildingService.createBuilding(payload)
@@ -71,8 +81,17 @@ export class RegisterBuildingComponent {
             next: () => {
               this.closeModal();
               this.reloadEnvs();
+              this.snackBar.open("Prédio criado com sucesso", "Fechar", {
+                duration: 9000,
+                panelClass: ['toast-success', 'toast']
+              })
             },
-            error: () => console.log('Erro ao criar ambiente')
+            error: () => {
+              this.snackBar.open("Erro ao criar prédio", "Fechar", {
+                duration: 9000,
+                panelClass: ['toast-error', 'toast']
+              })
+            }
           });
       }
   }

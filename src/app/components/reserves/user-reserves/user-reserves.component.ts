@@ -5,6 +5,7 @@ import { RouterLink } from "@angular/router";
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ReservationService } from '../../../services/reservation-service.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BuildingsService } from '../../../services/buildings.service';
 
 @Component({
   selector: 'app-user-reserves',
@@ -17,9 +18,12 @@ export class UserReservesComponent {
   private reservationService = inject(ReservationService)
   private authService = inject(AuthenticationService)
   private snackBar = inject(MatSnackBar)
+  private buildingService = inject(BuildingsService)
   enviorements: any[] = [];
   reservations: any[] = []
   formattedReserves: any[] = []
+  formattedEnviorements: any[] = []
+  user: any = {}
 
   cancelReserves(id:string) {
     this.reservationService.cancelReserve(id).subscribe({
@@ -28,6 +32,7 @@ export class UserReservesComponent {
           duration: 9000,
           panelClass: ['toast-info', 'toast']
         })
+        this.loadReserves()
       }
     })
   }
@@ -63,11 +68,24 @@ export class UserReservesComponent {
       });
     }
   }
+
+
+  formatEnviorements() {
+    for (const item of this.enviorements) {
+      this.buildingService.getBuildingById(item.fk_build).subscribe({
+        next: (res) => {
+          item.fk_build = res.building.name
+          this.formattedEnviorements.push(item)
+        }
+      })
+    }
+  }
+
   ngOnInit() {
     this.enviorementsService.getEnviorements().subscribe({
       next: (res) => {
-        console.log(res)
         this.enviorements = res.environment || []
+        this.formatEnviorements()
       },
       error: () => {
         console.log('Erro ao carregar os prédios');
@@ -81,14 +99,19 @@ export class UserReservesComponent {
     }
 
     this.authService.getUserInfo(token).subscribe({
-      next: (res1) => {
-        this.reservationService.getUserReservations(res1.id).subscribe({
-          next: (res) => {
-            this.reservations = res.userReserves.actives
-            this.formatReserves()
-          }
-        })
+      next: (res) => {
+        this.user = res
+        this.loadReserves()
       }})
+  }
+
+  loadReserves() {
+    this.reservationService.getUserReservations(this.user.id).subscribe({
+      next: (res) => {
+        this.reservations = res.userReserves.actives
+        this.formatReserves()
+      }
+    })
   }
 }
 

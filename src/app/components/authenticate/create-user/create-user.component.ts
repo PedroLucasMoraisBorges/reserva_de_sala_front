@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-user',
@@ -11,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class CreateUserComponent {
   authService = inject(AuthenticationService)
+  private snackBar = inject(MatSnackBar)
   router = inject(Router)
   name = ''
   email = ''
@@ -27,7 +29,10 @@ export class CreateUserComponent {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error('Erro de login:', err);
+        this.snackBar.open("Puxar do backend", "Fechar", {
+          duration: 9000,
+          panelClass: ['toast-error', 'toast']
+        });
       }
     });
   }
