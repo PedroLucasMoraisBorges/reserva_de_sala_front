@@ -23,8 +23,13 @@ export class UserReservesComponent {
   private authService = inject(AuthenticationService)
   private snackBar = inject(MatSnackBar)
   enviorements: any[] = [];
+  filteredEnviorements: any[] = []
   reservations: any[] = []
   user: any = {}
+
+  searchName: any = ''
+  searchSize: any = ''
+  searchFloor: any = ''
 
   cancelReserves(id:string) {
     this.reservationService.cancelReserve(id).subscribe({
@@ -42,6 +47,7 @@ export class UserReservesComponent {
     this.enviorementsService.getEnviorements().subscribe({
       next: (res) => {
         this.enviorements = res.environment || []
+        this.filteredEnviorements = this.enviorements
       },
       error: () => {
         console.log('Erro ao carregar os prédios');
@@ -67,6 +73,43 @@ export class UserReservesComponent {
         this.reservations = res.userReserves.actives
       }
     })
+  }
+
+  filterEnviorements() {
+
+    this.filteredEnviorements = this.enviorements.filter(env => {
+      console.log(env)
+
+      const matchName =
+        !this.searchName || env.name.toLowerCase().includes(this.searchName);
+
+      const matchSize =
+        !this.searchSize || env.indicated_limit >= this.searchSize;
+
+      const matchFloor =
+        !this.searchFloor || env.floor == this.searchFloor;
+
+      return matchName && matchSize && matchFloor;
+    });
+  }
+
+  handleInputNameChange(event: any) {
+    const value = event.target.value.toLowerCase();
+    this.searchName = value
+    this.filterEnviorements()
+  }
+
+  handleInputSizeChange(event: any) {
+    const value = event.target.value.toLowerCase();
+    this.searchSize = value
+    this.filterEnviorements()
+  }
+
+  handleInputFloorChange(event: any) {
+    const value = event.target.value.toLowerCase();
+    this.searchFloor = value
+    console.log(value)
+    this.filterEnviorements()
   }
 }
 

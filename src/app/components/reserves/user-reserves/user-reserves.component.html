@@ -22,16 +22,16 @@
         <section class="search-form">
             <p class="section-title">Pesquisar por Salas</p>
             <form id="search-form">
-                <input type="text" name="name" placeholder="Nome da sala" id="search-name">
-                <input type="number" name="limit" placeholder="Capacidade ex: 25" id="search-limit">
-                <input type="number" name="floor" placeholder="Qual andar?" id="search-floor">
+                <input type="text" name="name" (input)="handleInputNameChange($event)" placeholder="Nome da sala" id="search-name">
+                <input type="number" name="limit" (input)="handleInputSizeChange($event)" placeholder="Capacidade ex: 25" id="search-limit">
+                <input type="number" name="floor" (input)="handleInputFloorChange($event)" placeholder="Qual andar?" id="search-floor">
                 <button type="submit" id="search-btn">Buscar</button>
             </form>
         </section>
 
         <section class="rooms-results" id="rooms-results">
             <p class="section-title">Salas Encontradas</p>
-            @for (item of enviorements; track item) {
+            @for (item of filteredEnviorements; track item) {
               <div class="room-card">
                 <div class="room-image">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chair">
