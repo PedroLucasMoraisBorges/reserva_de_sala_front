@@ -28,6 +28,7 @@
     <h3 class="filters-title">Busca</h3>
     <div class="search-bar">
       <input
+        (input)="handleInputChange($event)"
         type="text"
         placeholder="Buscar por nome, localização ou descrição"
       />
@@ -53,7 +54,7 @@
   <section class="room-list">
     <div class="list-header">
       <h3 class="list-title">Salas Cadastradas</h3>
-      <p class="list-subtitle">5 salas encontradas</p>
+      <p class="list-subtitle">{{ enviorements.length }} salas encontradas</p>
     </div>
 
     <table>
@@ -71,10 +72,10 @@
           <td colspan="4">Nenhuma sala cadastrada.</td>
         </tr>
       } @else {
-        @for (item of enviorements; track item) {
+        @for (item of filteredEnviorements; track item) {
           <tr>
             <td>{{ item.name }}</td>
-            <td>{{ item.fk_build }}</td>
+            <td>{{ item.fk_build | buildingName | async}}</td>
             <td>{{ item.floor }}</td>
             <td>
               <button class="action-btn edit-btn" (click)="handleEditEnviorement(item)">Editar</button>

@@ -5,10 +5,11 @@ import { BuildingsService } from '../../services/buildings.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BuildingNamePipe } from '../../pipes/building-name.pipe';
 
 @Component({
   selector: 'app-register-room',
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule,RouterModule, BuildingNamePipe],
   templateUrl: './register-room.component.html',
   styleUrl: './register-room.component.css'
 })

@@ -4,10 +4,11 @@ import { EnviorementsService } from '../../services/enviorements.service';
 import { FormsModule } from '@angular/forms';
 import { BuildingsService } from '../../services/buildings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BuildingNamePipe } from '../../pipes/building-name.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BuildingNamePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -25,6 +26,7 @@ export class HomeComponent {
   selectedEnviorement: any = null;
   editMode: boolean = false;
   addNewEnviorement: boolean = false;
+  filteredEnviorements: any[] = [];
 
 
   handleAddNewEnviorement(){
@@ -48,6 +50,7 @@ export class HomeComponent {
   this.enviorementsService.getEnviorements().subscribe({
     next: (res) => {
       this.enviorements = res.environment || [];
+      this.filteredEnviorements = this.enviorements
     }
   });
 }
@@ -108,6 +111,14 @@ export class HomeComponent {
       }
   }
 
+  handleInputChange(event: any) {
+    const value = event.target.value.toLowerCase();
+
+    this.filteredEnviorements = this.enviorements.filter(env =>
+      env.name.toLowerCase().includes(value)
+    );
+  }
+
   ngOnInit() {
     this.buildingsService.getAllBuildings().subscribe({
       next: (res) => {
@@ -121,10 +132,7 @@ export class HomeComponent {
     this.enviorementsService.getEnviorements().subscribe({
       next: (res) => {
         this.enviorements = res.environment;
-        console.log('Ambientes carregados:', this.enviorements);
-      },
-      error: () => {
-        console.log('Erro ao carregar os ambientes');
+        this.filteredEnviorements = this.enviorements
       }
     });
   }

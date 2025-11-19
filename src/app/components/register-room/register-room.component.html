@@ -27,7 +27,7 @@
         @for (item of enviorements; track item) {
           <tr>
             <td>{{ item.name }}</td>
-            <td>{{ item.fk_build }}</td>
+            <td>{{ item.fk_build | buildingName | async }}</td>
             <td>{{ item.floor }}</td>
             <td>
               <button class="action-btn edit-btn" (click)="handleEditEnviorement(item)">Editar</button>

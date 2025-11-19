@@ -9,10 +9,11 @@ import { BuildingsService } from '../../../services/buildings.service';
 import { DatePipe } from '../../../pipes/date.pipe';
 import { EnviorementPipe } from '../../../pipes/enviorement.pipe';
 import { FirstSchedulePipe } from '../../../pipes/first-schedule.pipe';
+import { BuildingNamePipe } from '../../../pipes/building-name.pipe';
 
 @Component({
   selector: 'app-user-reserves',
-  imports: [CommonModule, RouterLink, MatSnackBarModule, DatePipe, EnviorementPipe, FirstSchedulePipe],
+  imports: [CommonModule, RouterLink, MatSnackBarModule, DatePipe, EnviorementPipe, FirstSchedulePipe, BuildingNamePipe],
   templateUrl: './user-reserves.component.html',
   styleUrl: './user-reserves.component.css'
 })
@@ -21,11 +22,8 @@ export class UserReservesComponent {
   private reservationService = inject(ReservationService)
   private authService = inject(AuthenticationService)
   private snackBar = inject(MatSnackBar)
-  private buildingService = inject(BuildingsService)
   enviorements: any[] = [];
   reservations: any[] = []
-  formattedReserves: any[] = []
-  formattedEnviorements: any[] = []
   user: any = {}
 
   cancelReserves(id:string) {
@@ -40,51 +38,10 @@ export class UserReservesComponent {
     })
   }
 
-  formatReserves() {
-    this.formattedReserves = [];
-
-    for (const item of this.reservations) {
-      this.enviorementsService.getEnviorementById(item.room.id).subscribe({
-        next: (res) => {
-          const enviorement = res.enviorement;
-
-          const firstSchedule = item.schedules
-            .map((s: any) => s.entryTime)
-            .sort()[0]
-            .slice(0, 5);
-
-
-          const formatted = {
-            id: item.id,
-            enviorementName: enviorement.name,
-            date: item.date,
-            firstSchedule: firstSchedule,
-            original: item
-          };
-
-          this.formattedReserves.push(formatted);
-        }
-      });
-    }
-  }
-
-
-  formatEnviorements() {
-    for (const item of this.enviorements) {
-      this.buildingService.getBuildingById(item.fk_build).subscribe({
-        next: (res) => {
-          item.fk_build = res.building.name
-          this.formattedEnviorements.push(item)
-        }
-      })
-    }
-  }
-
   ngOnInit() {
     this.enviorementsService.getEnviorements().subscribe({
       next: (res) => {
         this.enviorements = res.environment || []
-        this.formatEnviorements()
       },
       error: () => {
         console.log('Erro ao carregar os prédios');
@@ -108,7 +65,6 @@ export class UserReservesComponent {
     this.reservationService.getUserReservations(this.user.id).subscribe({
       next: (res) => {
         this.reservations = res.userReserves.actives
-        console.log(this.reservations)
       }
     })
   }

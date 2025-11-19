@@ -31,7 +31,7 @@
 
         <section class="rooms-results" id="rooms-results">
             <p class="section-title">Salas Encontradas</p>
-            @for (item of formattedEnviorements; track item) {
+            @for (item of enviorements; track item) {
               <div class="room-card">
                 <div class="room-image">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chair">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="room-info">
                   <h3>{{item.name}}</h3>
-                  <p>{{item.fk_build}}</p>
+                  <p>{{item.fk_build | buildingName | async}}</p>
                   <p>{{item.floor}}</p>
                 </div>
                 <a routerLink="/enviorement/{{item.id}}" class="view-schedule-btn">Ver Horários</a>

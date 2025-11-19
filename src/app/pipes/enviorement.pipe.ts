@@ -1,4 +1,4 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { EnviorementsService } from '../services/enviorements.service';
 import { map } from 'rxjs';
 
@@ -10,7 +10,7 @@ export class EnviorementPipe implements PipeTransform {
 
   constructor(private enviorementService: EnviorementsService) {}
 
-  transform(id: number) {
+  transform(id: string) {
     return this.enviorementService.getEnviorementById(id).pipe(
       map(res => res.enviorement.name)
     );
