@@ -6,10 +6,13 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { ReservationService } from '../../../services/reservation-service.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BuildingsService } from '../../../services/buildings.service';
+import { DatePipe } from '../../../pipes/date.pipe';
+import { EnviorementPipe } from '../../../pipes/enviorement.pipe';
+import { FirstSchedulePipe } from '../../../pipes/first-schedule.pipe';
 
 @Component({
   selector: 'app-user-reserves',
-  imports: [CommonModule, RouterLink, MatSnackBarModule],
+  imports: [CommonModule, RouterLink, MatSnackBarModule, DatePipe, EnviorementPipe, FirstSchedulePipe],
   templateUrl: './user-reserves.component.html',
   styleUrl: './user-reserves.component.css'
 })
@@ -45,10 +48,6 @@ export class UserReservesComponent {
         next: (res) => {
           const enviorement = res.enviorement;
 
-
-          const dateObj = new Date(item.date);
-          const formattedDate = new Date(item.date + "T00:00:00").toLocaleDateString("pt-BR");
-
           const firstSchedule = item.schedules
             .map((s: any) => s.entryTime)
             .sort()[0]
@@ -58,7 +57,7 @@ export class UserReservesComponent {
           const formatted = {
             id: item.id,
             enviorementName: enviorement.name,
-            date: formattedDate,
+            date: item.date,
             firstSchedule: firstSchedule,
             original: item
           };
@@ -109,7 +108,7 @@ export class UserReservesComponent {
     this.reservationService.getUserReservations(this.user.id).subscribe({
       next: (res) => {
         this.reservations = res.userReserves.actives
-        this.formatReserves()
+        console.log(this.reservations)
       }
     })
   }

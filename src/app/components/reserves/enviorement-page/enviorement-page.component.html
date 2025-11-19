@@ -30,7 +30,7 @@
                     } @else {
                       @for (item of reservations; track item) {
                         <tr>
-                            <td class="dateCollun">{{ item.date }}</td>
+                            <td class="dateCollun">{{ item.date | myDate }}</td>
                             <td class="tags">
                               @for (hour of item.schedules; track hour) {
                                 <span class="entryTimeTag">{{hour.entryTime}}</span>

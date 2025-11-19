@@ -7,10 +7,11 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { BuildingsService } from '../../../services/buildings.service';
+import { DatePipe } from '../../../pipes/date.pipe';
 
 @Component({
   selector: 'app-enviorement-page',
-  imports: [CommonModule, FormsModule, MatSnackBarModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule, DatePipe],
   templateUrl: './enviorement-page.component.html',
   styleUrl: './enviorement-page.component.css'
 })

@@ -10,9 +10,9 @@
               @if (reservations.length === 0) {
 
               } @else {
-                @for (item of formattedReserves; track item) {
+                @for (item of reservations; track item) {
                   <div class="reserve-card">
-                    <span>{{item.enviorementName}} - {{item.date}} - {{item.firstSchedule}}</span>
+                    <span>{{item.room.id | enviorementName | async}} - {{item.date | myDate}} - {{item.schedules | firstSchedule}}</span>
                     <button href="#" class="cancel-btn" (click)="cancelReserves(item.id)">Cancelar</button>
                 </div>
                 }
