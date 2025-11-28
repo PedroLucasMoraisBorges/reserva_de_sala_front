@@ -78,6 +78,13 @@ section .section-title {
     color: #e74c3c;
     text-decoration: none;
     font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.reserve-card a:hover {
+    background-color: #fee;
 }
 
 .no-reserves-message {
@@ -108,14 +115,43 @@ section .section-title {
     color: #4F545C;
 }
 
+/* Botão de Busca Moderno */
 .search-form button {
-    background-color: #1b53c7;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     padding: 12px 24px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.search-form button:active {
+    transform: translateY(0);
+}
+
+.search-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.search-form button:hover::before {
+    left: 100%;
 }
 
 /* Room Results Section */
@@ -132,6 +168,11 @@ section .section-title {
     border: 1px solid #E0E0E0;
     border-radius: 8px;
     margin-bottom: 12px;
+    transition: box-shadow 0.2s;
+}
+
+.room-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .room-card .room-image {
@@ -168,13 +209,43 @@ section .section-title {
     margin-bottom: 4px;
 }
 
+/* Botão de Ver Sala Moderno */
 .room-card a {
-    background-color: #1b53c7;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     padding: 8px 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     text-decoration: none;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    display: inline-block;
+}
+
+.room-card a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.room-card a:active {
+    transform: translateY(0);
+}
+
+.room-card a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.room-card a:hover::before {
+    left: 100%;
 }

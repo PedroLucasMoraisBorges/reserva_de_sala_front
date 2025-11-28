@@ -10,7 +10,77 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #111;
     margin: 0 !important;
+}
+
+/* Botão Moderno com Gradiente */
+button,
+.btn,
+.add-button,
+.modal-close-btn,
+.modal-save-btn,
+.submit-btn,
+.primary-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:hover,
+.btn:hover,
+.add-button:hover,
+.modal-close-btn:hover,
+.modal-save-btn:hover,
+.submit-btn:hover,
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+button:active,
+.btn:active,
+.add-button:active,
+.modal-close-btn:active,
+.modal-save-btn:active,
+.submit-btn:active,
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+button::before,
+.btn::before,
+.add-button::before,
+.modal-close-btn::before,
+.modal-save-btn::before,
+.submit-btn::before,
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before,
+.btn:hover::before,
+.add-button:hover::before,
+.modal-close-btn:hover::before,
+.modal-save-btn:hover::before,
+.submit-btn:hover::before,
+.primary-btn:hover::before {
+    left: 100%;
 }

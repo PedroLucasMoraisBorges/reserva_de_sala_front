@@ -31,24 +31,82 @@ body {
   gap: 12px;
   align-items: center;
 }
+
+/* Botões Modernos com Gradiente */
 .add-button,
 .link-secondary {
   padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
   border: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .add-button {
-  background-color: #1b53c7;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
+
+.add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.add-button:active {
+  transform: translateY(0);
+}
+
+.add-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.add-button:hover::before {
+  left: 100%;
+}
+
+/* Botão Secundário */
 .link-secondary {
-  background-color: white;
-  color: #1b53c7;
-  border: 1px solid #1b53c7;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4c1d95;
+  border: 2px solid #a78bfa;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+}
+
+.link-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.link-secondary:active {
+  transform: translateY(0);
+}
+
+.link-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.link-secondary:hover::before {
+  left: 100%;
 }
 
 table {
@@ -158,18 +216,76 @@ th {
   gap: 10px;
   margin-top: 20px;
 }
+
+/* Botões do Modal com Gradiente */
 .modal-buttons .modal-close-btn,
 .modal-buttons .modal-save-btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .modal-buttons .modal-close-btn {
-  background-color: #4f545c;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #4c1d95;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
 }
+
+.modal-buttons .modal-close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.modal-buttons .modal-close-btn:active {
+  transform: translateY(0);
+}
+
+.modal-buttons .modal-close-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.modal-buttons .modal-close-btn:hover::before {
+  left: 100%;
+}
+
 .modal-buttons .modal-save-btn {
-  background-color: #1b53c7;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.modal-buttons .modal-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.modal-buttons .modal-save-btn:active {
+  transform: translateY(0);
+}
+
+.modal-buttons .modal-save-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.modal-buttons .modal-save-btn:hover::before {
+  left: 100%;
 }
