@@ -20,6 +20,7 @@ export class HomeComponent {
   reservedEnviorements: number = 0;
   canceledReserves: number = 0;
   activeEnviorements: number = 0;
+  registredBuildingds: number = 0
 
   enviorements: any[] = [];
   buildings: any[] = [];
@@ -123,6 +124,7 @@ export class HomeComponent {
     this.buildingsService.getAllBuildings().subscribe({
       next: (res) => {
         this.buildings = res.buildings || [];
+        this.registredBuildingds = res.buildings.length || 0
       },
       error: () => {
         console.log('Erro ao carregar os prédios');
