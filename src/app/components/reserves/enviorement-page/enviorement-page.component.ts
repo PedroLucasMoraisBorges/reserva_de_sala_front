@@ -176,4 +176,17 @@ export class EnviorementPageComponent {
       })
     }})
   }
+
+  closeModal() {
+    this.initReserve = false;
+    this.dataHasSelected = false; // Reseta o estado para a próxima vez
+    this.selectedIndexes.clear(); // Limpa seleções anteriores
+  }
+
+  // Quando clicar em "Alterar data" dentro do modal
+  resetDate() {
+    this.dataHasSelected = false;
+    // O initReserve continua true, mantendo o modal aberto,
+    // mas o @if do HTML vai voltar a mostrar o input de data.
+  }
 }
