@@ -289,3 +289,50 @@ th {
 .modal-buttons .modal-save-btn:hover::before {
   left: 100%;
 }
+
+.buttons {
+  display: flex;
+  gap: .8rem;
+}
+.delete-btn, .edit-btn {
+  border: none;
+  border-radius: 8px; /* Bordas um pouco mais arredondadas ficam mais modernas */
+  padding: 8px 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Essencial para o efeito de hover funcionar suavemente */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Caso tenha ícones junto com texto */
+}
+
+/* --- Botão Deletar --- */
+.delete-btn {
+  background-color: #e74c3c;
+  /* Sombra inicial suave vermelha */
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
+}
+
+.delete-btn:hover {
+  background-color: #ff5545; /* Um pouco mais claro no hover */
+  transform: translateY(-2px); /* O mesmo pulinho do seu modal */
+  /* Sombra vermelha difusa e maior */
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+}
+
+
+/* --- Botão Editar --- */
+.edit-btn {
+  /* Usando um Azul Indigo para contrastar com o vermelho, ou um Amarelo/Laranja */
+  background-color: rgba(52, 152, 219, 0.5) ;
+  /* Sombra inicial suave azul */
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+}
+
+.edit-btn:hover {
+  background-color: #4faaff;
+  transform: translateY(-2px);
+  /* Sombra azul difusa e maior */
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+}

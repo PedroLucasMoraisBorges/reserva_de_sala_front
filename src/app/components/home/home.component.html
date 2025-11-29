@@ -77,7 +77,7 @@
             <td>{{ item.name }}</td>
             <td>{{ item.fk_build | buildingName | async}}</td>
             <td>{{ item.floor }}</td>
-            <td>
+            <td class="buttons">
               <button class="action-btn edit-btn" (click)="handleEditEnviorement(item)">Editar</button>
               <button class="action-btn delete-btn" (click)="deleteEnviorement(item.id)">Excluir</button>
             </td>

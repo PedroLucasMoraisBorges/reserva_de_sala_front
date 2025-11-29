@@ -249,3 +249,24 @@ section .section-title {
 .room-card a:hover::before {
     left: 100%;
 }
+
+
+.cancel-btn {
+  border: none;
+  border-radius: 8px; /* Bordas um pouco mais arredondadas ficam mais modernas */
+  padding: 8px 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Essencial para o efeito de hover funcionar suavemente */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Caso tenha ícones junto com texto */
+}
+
+/* --- Botão Deletar --- */
+.cancel-btn {
+  background-color: #e74c3c;
+  /* Sombra inicial suave vermelha */
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
+}

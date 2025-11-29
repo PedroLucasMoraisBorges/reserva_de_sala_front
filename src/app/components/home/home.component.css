@@ -294,6 +294,7 @@ tbody td {
   left: 100%;
 }
 
+
 .actions {
   position: relative;
 }
@@ -302,16 +303,109 @@ tbody td {
   font-size: 24px;
   color: #092b71;
 }
+
+.botoes-container { /* Ou a classe da div que envolve os botões */
+  display: flex;
+  gap: 12px; /* O espaço exato entre eles */
+  align-items: center; /* Mantém eles alinhados verticalmente */
+}
+
+.buttons {
+  display: flex;
+  gap: .8rem;
+}
+.delete-btn, .edit-btn {
+  border: none;
+  border-radius: 8px; /* Bordas um pouco mais arredondadas ficam mais modernas */
+  padding: 8px 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Essencial para o efeito de hover funcionar suavemente */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Caso tenha ícones junto com texto */
+}
+
+/* --- Botão Deletar --- */
+.delete-btn {
+  background-color: #e74c3c;
+  /* Sombra inicial suave vermelha */
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
+}
+
+.delete-btn:hover {
+  background-color: #ff5545; /* Um pouco mais claro no hover */
+  transform: translateY(-2px); /* O mesmo pulinho do seu modal */
+  /* Sombra vermelha difusa e maior */
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+}
+
+
+/* --- Botão Editar --- */
+.edit-btn {
+  /* Usando um Azul Indigo para contrastar com o vermelho, ou um Amarelo/Laranja */
+  background-color: rgba(52, 152, 219, 0.5) ;
+  /* Sombra inicial suave azul */
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+}
+
+.edit-btn:hover {
+  background-color: #4faaff;
+  transform: translateY(-2px);
+  /* Sombra azul difusa e maior */
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+}
+
+/* --- Menu de Ações (Dropdown) --- */
 .actions-menu {
-  display: none;
+  display: none; /* Mantive o seu display */
   position: absolute;
-  top: 28px;
+  top: 35px; /* Um pouco mais de espaço do topo */
   right: 0;
   background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  /* Borda mais sutil para parecer "flutuante" */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+
+  /* Sombra mais profunda para dar profundidade (efeito 3D) */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+
   z-index: 10;
+  overflow: hidden; /* Para o hover dos itens internos respeitar a borda arredondada */
+  padding: 8px 0; /* Espaço interno vertical */
+  min-width: 150px;
+
+  /* Animação suave de entrada (opcional, mas fica chique) */
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* DICA EXTRA: Estilize os itens dentro do menu para ficarem bonitos */
+.actions-menu button,
+.actions-menu a {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.actions-menu button:hover,
+.actions-menu a:hover {
+  background-color: #f5f7fa; /* Cinza bem clarinho no hover dos itens */
+  color: #667eea; /* A cor do seu tema principal */
+}
+
+/* Pequena animação para o menu aparecer */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .actions-menu button {
   display: block;
